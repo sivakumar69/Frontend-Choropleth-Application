@@ -42,7 +42,7 @@ class MapCustomization extends Component {
       sliderValue: 70,
       currentColor: "#333333",
       domainKey: "blue",
-      currentCity: this.props.city
+      currentCity: this.props.city,
     };
 
     this.handleSliderChange = this.handleSliderChange.bind(this);
@@ -50,15 +50,15 @@ class MapCustomization extends Component {
   }
 
   handleSliderChange(event, sliderValue){
-    let value = 3000;
+    let value = this.props.scaleValue;
     console.log(sliderValue);
     if (sliderValue > 70){
       let x = sliderValue - 70;
-      value = 3000 + (x*10);
+      value = value + (x*10);
     }
     else {
       let x = 70 - sliderValue;
-      value = 3000 - (x*10);
+      value = value - (x*10);
     }
     this.props.changeMapScale(value);
     this.setState({sliderValue: sliderValue});
@@ -78,7 +78,7 @@ class MapCustomization extends Component {
   handleCityChnage = name => event => {
     this.props.changeCity(event.target.value);
     this.props.changeScale(event.target.value);
-    this.setState({currentCity: event.target.value});
+    this.setState({currentCity: event.target.value, sliderValue: 70});
   };
 
   render(){
