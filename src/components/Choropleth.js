@@ -13,8 +13,8 @@ import Paper from '@material-ui/core/Paper';
 
 
 const cityLatLong  = {
-  "California": {"center": [-119.4179, 36.7783], "scale": 2800},
-  "Texas": {"center": [-99.9018, 31.9686], "scale": 2800},
+  "California": {"center": [-119.4179, 36.7783], "scale": 2700},
+  "Texas": {"center": [-99.9018, 31.9686], "scale": 2700},
   "NorthCarolina": {"center": [-79.0193, 35.7596], "scale": 4000}
 };
 
@@ -157,7 +157,7 @@ class ChoroplethMap extends Component {
           <Grid item xs={6}>
              <MapCustomization changeMapBorderColor={this.changeMapBorderColor} changeMapColorDomain={this.changeMapColorDomain}
                                 changeMapScale={this.changeMapScale} changeCity={this.props.changeCity}  city={this.props.city}
-                                changeScale={this.changeScale} />
+                                changeScale={this.changeScale} scaleValue={this.state.mapScale} />
           </Grid>
         </Grid>
       </div>

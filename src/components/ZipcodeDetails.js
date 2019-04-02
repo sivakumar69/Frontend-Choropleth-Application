@@ -86,7 +86,7 @@ class ZipcodeDetails extends Component {
     let d = new Date(0);
     d.setUTCSeconds(epoch);
     let time = d.toString().split(' ')[4];
-    return time + ' GMT';
+    return time + ' EST';
   }
 
   componentDidUpdate() {
