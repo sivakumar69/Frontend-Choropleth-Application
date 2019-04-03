@@ -7,9 +7,6 @@ import MapCustomization from './MapCustomization';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Paper from '@material-ui/core/Paper';
 
 
 const cityLatLong  = {
@@ -35,7 +32,7 @@ class ChoroplethMap extends Component {
     super(props);
     this.state = {
     data:[],
-    mapBorderColor: "#333333",
+    mapBorderColor: "#000000",
     mapMinColor:"#EFEFFF",
     mapMaxColor: "#02386F",
     mapScale: cityLatLong[this.props.city]["scale"],
@@ -127,7 +124,6 @@ class ChoroplethMap extends Component {
       data: dataset,
       done: function(datamap) {
         datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-          console.log(geography.id);
           window.location = '/zipcode-details/' + that.props.city  + '/' + geography.id ;
         });
       },
@@ -145,19 +141,20 @@ class ChoroplethMap extends Component {
 
 
   render() {
-    const { classes } = this.props;
 
     return (
       <div style={{ height: "100%", width: "100%",}}>
-        <Grid style={{ height: "100%" }} container spacing={16}>
+        <Grid style={{ height: "100%" }} container >
           <Grid item xs={6}>
-            <div id="cloropleth_map" style={{ height: "100%", width: "100%",}}>
+            <div id="cloropleth_map" style={{ height: "100%", width: "100%", backgroundColor: '#e5dede', opacity:'0.9'}}>
             </div>
           </Grid>
           <Grid item xs={6}>
+            <div style={{backgroundColor:'#e5dede', opacity:'0.9', height:'100%', width:'100%'}}>
              <MapCustomization changeMapBorderColor={this.changeMapBorderColor} changeMapColorDomain={this.changeMapColorDomain}
                                 changeMapScale={this.changeMapScale} changeCity={this.props.changeCity}  city={this.props.city}
-                                changeScale={this.changeScale} scaleValue={this.state.mapScale} />
+                                changeScale={this.changeScale} scaleValue={cityLatLong[this.props.city]["scale"]} />
+            </div>
           </Grid>
         </Grid>
       </div>

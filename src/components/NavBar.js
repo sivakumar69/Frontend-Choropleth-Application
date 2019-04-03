@@ -6,8 +6,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-import backImg from '../img1.jpg';
-
 const styles = theme => ({
 
   sectionDesktop: {
@@ -24,9 +22,6 @@ const styles = theme => ({
 });
 
 class NavBar extends Component{
-  constructor(props){
-    super(props);
-  }
 
   render(){
 
@@ -36,13 +31,14 @@ class NavBar extends Component{
       <div className={classes.root}>
         <CssBaseline />
         <AppBar position="fixed" className={classes.appBar}>
-          <Toolbar style={{opacity:1,backgroundImage: `url(${backImg})`}}>
+          <Toolbar style={{opacity:1,backgroundImage: `url('/images/app-bar-image.jpg')`}}>
+            <img alt="logo" src="/images/logo.gif" style={{height:'40px', width:'40px'}} />
             <Typography variant="h6" color="inherit" noWrap>
-              <strong><a href="/" style={{textDecoration:"none", color:"inherit"}}>Choropleth App </a></strong>
+              <strong><a href="/" style={{textDecoration:"none", color:"inherit"}}>&nbsp;Choropleth App </a></strong>
             </Typography>
               <div className={classes.grow} />
               <div style={{paddingRight:'4%'}} className={classes.sectionDesktop}>
-                <strong><a style={{fontSize: "13px"}}>Siva Kumar Reddy Vayyeti</a></strong>
+                <strong><a href="/" style={{textDecoration:"none", color:"inherit", fontSize: "13px"}}>Siva Kumar Reddy Vayyeti</a></strong>
               </div>
           </Toolbar>
         </AppBar>

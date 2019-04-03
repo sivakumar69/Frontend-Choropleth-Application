@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
-import './App.css';
 import Papa from 'papaparse';
 import Choropleth from './components/Choropleth';
 import ZipcodeDetails from './components/ZipcodeDetails';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import NavBar from './components/NavBar';
-import backgroundImg from './earth.gif';
-import logo from './logo.png';
 
 class App extends Component {
 
@@ -47,7 +44,6 @@ class App extends Component {
   }
 
   changeCity(cityName) {
-    console.log("Change City is initiated in App.js");
     this.setState({city: cityName, data:[]});
   }
 
@@ -59,14 +55,14 @@ class App extends Component {
   render() {
     this.parseCSVFile();
     return (
-      <div style={{height:"100vh", width: "100vw", backgroundColor:'#e5dede'}} >
+      <div style={{height:"100vh", width: "100vw", backgroundColor:'#e5dede', backgroundImage: `url('/images/galaxy.jpg')`}} >
         <NavBar />
         <Router>
           <div style={{height:"100vh", width: "100vw", marginTop:"1%"}}>
             <Route exact path="/"
               render={(props) => <Choropleth {...props} city={this.state.city} changeCity={this.changeCity}  data={this.state.data} />} />
             <Route exact path="/zipcode-details/:city/:zipcode"
-              render={(props) => <div style={{height:"100%", width:"100%", backgroundImage: `url(${backgroundImg})`}}><ZipcodeDetails {...props} city={props.match.params.city} zipcode={props.match.params.zipcode} /> </div>} />
+              render={(props) => <div style={{height:"100%", width:"100%", backgroundImage: `url('/images/galaxy.jpg')`}}><ZipcodeDetails {...props} city={props.match.params.city} zipcode={props.match.params.zipcode} /> </div>} />
           </div>
         </Router>
       </div>
