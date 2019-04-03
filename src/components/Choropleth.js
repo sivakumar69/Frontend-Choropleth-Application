@@ -124,7 +124,9 @@ class ChoroplethMap extends Component {
       data: dataset,
       done: function(datamap) {
         datamap.svg.selectAll('.datamaps-subunit').on('click', function(geography) {
-          window.location = '/zipcode-details/' + that.props.city  + '/' + geography.id ;
+          if (typeof dataset[geography.id] !== "undefined"){
+            window.location = '/zipcode-details/' + that.props.city  + '/' + geography.id ;
+          }
         });
       },
       setProjection: function (element) {
