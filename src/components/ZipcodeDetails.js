@@ -34,7 +34,7 @@ class ZipcodeDetails extends Component {
   constructor(props){
     super(props);
     this.state = {
-      expanded: "state_pannel",
+      expanded: "geography_pannel",
       data: undefined,
     };
     this.handleChange = this.handleChange.bind(this);

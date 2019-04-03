@@ -10,9 +10,9 @@ import Grid from '@material-ui/core/Grid';
 
 
 const cityLatLong  = {
-  "California": {"center": [-119.4179, 36.7783], "scale": 2700},
-  "Texas": {"center": [-99.9018, 31.9686], "scale": 2700},
-  "NorthCarolina": {"center": [-79.0193, 35.7596], "scale": 4000}
+  "LosAngeles": {"center": [-118.2437, 34.0522], "scale": 11500},
+  "Houston": {"center": [-95.3698, 29.7604], "scale": 11500},
+  "Phoenix": {"center": [-112.0740, 33.4484], "scale": 8000}
 };
 
 

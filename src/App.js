@@ -21,7 +21,7 @@ class App extends Component {
 
   componentWillMount() {
     if(Object.keys(this.props).length === 0){
-      this.setState({city: 'California'});
+      this.setState({city: 'LosAngeles'});
     }
     else{
       this.setState({city: this.props.match.params.city});
