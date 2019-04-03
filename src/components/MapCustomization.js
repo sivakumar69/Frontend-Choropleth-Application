@@ -48,12 +48,12 @@ class MapCustomization extends Component {
   handleSliderChange(event, sliderValue){
     let value = this.props.scaleValue;
     if (sliderValue > 70){
-      let x = sliderValue - 70;
-      value = value + (x*10);
+      let x = (sliderValue - 70)/10;
+      value = value + (x*1500);
     }
     else {
-      let x = 70 - sliderValue;
-      value = value - (x*10);
+      let x = (70 - sliderValue)/10;
+      value = value - (x*500);
     }
     this.props.changeMapScale(value);
     this.setState({sliderValue: sliderValue});
@@ -128,9 +128,9 @@ class MapCustomization extends Component {
                 id: 'city',
               }}
             >
-              <option value={"California"}>California</option>
-              <option value={"Texas"}>Texas</option>
-              <option value={"NorthCarolina"}>North Carolina</option>
+              <option value={"LosAngeles"}>Los Angeles</option>
+              <option value={"Houston"}>Houston</option>
+              <option value={"Phoenix"}>Phoenix</option>
             </Select>
 
       </div>
