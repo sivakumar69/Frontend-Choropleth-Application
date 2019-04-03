@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-
 import Slider from '@material-ui/lab/Slider';
-import Typography from '@material-ui/core/Typography';
-
 import { CompactPicker    } from 'react-color';
-
 import Select from '@material-ui/core/Select';
 
 const styles = theme => ({
@@ -40,7 +36,7 @@ class MapCustomization extends Component {
     super(props);
     this.state = {
       sliderValue: 70,
-      currentColor: "#333333",
+      currentColor: "#000000",
       domainKey: "blue",
       currentCity: this.props.city,
     };
@@ -51,7 +47,6 @@ class MapCustomization extends Component {
 
   handleSliderChange(event, sliderValue){
     let value = this.props.scaleValue;
-    console.log(sliderValue);
     if (sliderValue > 70){
       let x = sliderValue - 70;
       value = value + (x*10);
@@ -86,7 +81,7 @@ class MapCustomization extends Component {
     const { classes } = this.props;
 
     return (
-      <div style={{marginTop:"15%", paddingRight:"10%"}}>
+      <div style={{paddingTop:'15%'}}>
       <p><b>Adjust Map Size</b></p>
       <Slider style={{width: '50%'}}
         value={this.state.sliderValue}

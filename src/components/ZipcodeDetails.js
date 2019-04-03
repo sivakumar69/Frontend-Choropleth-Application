@@ -14,6 +14,7 @@ const styles = theme => ({
     marginTop: '3%',
     paddingLeft:'12%',
     paddingRight:'12%',
+    opacity:'0.9'
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -23,6 +24,9 @@ const styles = theme => ({
   secondaryHeading: {
     fontSize: theme.typography.pxToRem(15),
     color: theme.palette.text.secondary,
+  },
+  description: {
+    marginBottom:'10px',
   },
 });
 
@@ -45,7 +49,6 @@ class ZipcodeDetails extends Component {
   }
 
   updateData(result) {
-    console.log("UpdaetData Callback");
     let data = result.data;
     for(let i=0; i<data.length; i++) {
       if(data[i].zip === this.props.zipcode){
@@ -56,7 +59,6 @@ class ZipcodeDetails extends Component {
 
   parseCSVFile(){
     let csvFilePath = require(`../Data/${this.props.city}/ZipData.csv`);
-    console.log(csvFilePath);
     Papa.parse(csvFilePath, {
       header: true,
       download: true,
@@ -110,112 +112,132 @@ class ZipcodeDetails extends Component {
   render() {
     const { classes } = this.props;
     const { expanded } = this.state;
-    const { data } = this.props;
     const { weather } = this.state;
 
     return (
       <div className={classes.root}>
-        <br/><br/><br />
-        <ExpansionPanel expanded={expanded === 'geography_pannel'} onChange={this.handleChange('geography_pannel')}>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Geography Details</Typography>
-            <Typography className={classes.secondaryHeading}>Expand Panel to know about lat, lng details</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <div>
-              <p>
-                <Typography>
-                  <b>Latitude: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.lat}<sup>o</sup> N
-                  <b>&emsp;  Longitude: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.lng}<sup>o</sup> W
-                </Typography>
-              </p>
-              <p>
-                <Typography>
-                  <b>Time-Zone: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.timezone.split("_").join(" ")}
-                </Typography>
-              </p>
+        <div style={{paddingTop:'10%'}}>
+          <ExpansionPanel expanded={expanded === 'geography_pannel'} onChange={this.handleChange('geography_pannel')}>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+              <div className={classes.heading}>
+                <img alt="compass" src="/images/compass.png" style={{height:'50px', width:'50px', float:'left'}}/>
+                <div>
+                  <p>&nbsp; Geography Details</p>
+                </div>
+              </div>
+              <Typography className={classes.secondaryHeading}>Expand Panel to know about lat, lng details</Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <div>
+                <div className={classes.description}>
+                  <Typography>
+                    <b>Latitude: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.lat}<sup>o</sup> N
+                    <b>&emsp;  Longitude: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.lng}<sup>o</sup> W
+                  </Typography>
+                </div>
+                <div className={classes.description}>
+                  <Typography>
+                    <b>Time-Zone: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.timezone.split("_").join(" ")}
+                  </Typography>
+                </div>
+              </div>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          <ExpansionPanel expanded={expanded === 'population_pannel'} onChange={this.handleChange('population_pannel')}>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <div className={classes.heading}>
+              <img alt="census" src="/images/census.png" style={{height:'50px', width:'50px', float:'left'}}/>
+              <div>
+                <p>&nbsp; Population Census</p>
+              </div>
             </div>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel expanded={expanded === 'population_pannel'} onChange={this.handleChange('population_pannel')}>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Population Census</Typography>
-            <Typography className={classes.secondaryHeading}>
-              Expand to view population & density
-            </Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <div>
-              <p>
-                <Typography>
-                  <b>Total Population: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.population}
-                  <b>&emsp;  Population Density: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.density} Per Sq. Mi
-                </Typography>
-              </p>
+              <Typography className={classes.secondaryHeading}>
+                Expand to view population & density
+              </Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <div>
+                <div className={classes.description}>
+                  <Typography>
+                    <b>Total Population: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.population}
+                    <b>&emsp;  Population Density: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.density} Per Sq. Mi
+                  </Typography>
+                </div>
+              </div>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          <ExpansionPanel expanded={expanded === 'state_pannel'} onChange={this.handleChange('state_pannel')}>
+            <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+            <div className={classes.heading}>
+              <img alt="location" src="/images/location.png" style={{height:'50px', width:'50px', float:'left'}}/>
+              <div>
+                <p>&nbsp; State Details</p>
+              </div>
             </div>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel expanded={expanded === 'state_pannel'} onChange={this.handleChange('state_pannel')}>
-          <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>State Details</Typography>
-            <Typography className={classes.secondaryHeading}>
-              Expand to view County, City, State, & State Code
-            </Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <div>
-              <p>
-                <Typography>
-                  <b>County: </b>  {typeof this.state.data === "undefined" ? "undefined" : this.state.data.county_name}
-                  <b>&emsp;  City: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.city}
-                </Typography>
-              </p>
-              <p>
-                <Typography>
-                  <b>State: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.state_name}
-                  <b>&emsp;  State ID: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.state_id}
-                </Typography>
-              </p>
+              <Typography className={classes.secondaryHeading}>
+                Expand to view County, City, State, & State Code
+              </Typography>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <div>
+                <div className={classes.description}>
+                  <Typography>
+                    <b>County: </b>  {typeof this.state.data === "undefined" ? "undefined" : this.state.data.county_name}
+                    <b>&emsp;  City: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.city}
+                  </Typography>
+                </div>
+                <div className={classes.description}>
+                  <Typography>
+                    <b>State: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.state_name}
+                    <b>&emsp;  State ID: </b>  {typeof this.state.data === "undefined" ? "undefined" :this.state.data.state_id}
+                  </Typography>
+                </div>
+              </div>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+          <ExpansionPanel expanded={expanded === 'weather_pannel'} onChange={this.handleChange('weather_pannel')}>
+            <ExpansionPanelSummary style={{backgroundColor:"light-blue"}} expandIcon={<ExpandMoreIcon />}>
+            <div className={classes.heading}>
+              <img alt="weather" src="/images/weather.png" style={{height:'50px', width:'50px', float:'left'}}/>
+              <div>
+                <p>&nbsp; Weather Details</p>
+              </div>
             </div>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
-        <ExpansionPanel expanded={expanded === 'weather_pannel'} onChange={this.handleChange('weather_pannel')}>
-          <ExpansionPanelSummary style={{backgroundColor:"light-blue"}} expandIcon={<ExpandMoreIcon />}>
-            <Typography className={classes.heading}>Weather Details</Typography>
-          </ExpansionPanelSummary>
-          <ExpansionPanelDetails>
-            <div>
-              <p>
-                <Typography>
-                  <b>Current Temperature: </b>  {typeof weather === "undefined" ? "undefined" :
-                    this.getFareinheitFromKelvin(weather.main.temp).toFixed(2)}<sup>o</sup> F
-                  <b>&emsp;  Minimum Temperature: </b>  {typeof weather === "undefined" ? "undefined" :
-                    this.getFareinheitFromKelvin(weather.main.temp_min).toFixed(2)}<sup>o</sup> F
-                  <b>&emsp;  Maximum Temperature: </b>  {typeof weather === "undefined" ? "undefined" :
-                    this.getFareinheitFromKelvin(weather.main.temp_max).toFixed(2)}<sup>o</sup> F
-                </Typography>
-              </p>
-              <p>
-                <Typography>
-                  <b>Humidity: </b>  {typeof weather === "undefined" ? "undefined" : weather.main.humidity}%
-                  <b>&emsp;Pressure: </b>  {typeof weather === "undefined" ? "undefined" : (0.03 * weather.main.pressure).toFixed(2)} inHg
-                </Typography>
-              </p>
-              <p>
-                <Typography>
-                  <b>Visibility: </b>  {typeof weather === "undefined" ? "undefined" : weather.visibility} Yards
-                  <b>&emsp;Wind Speed: </b>  {typeof weather === "undefined" ? "undefined" : weather.wind.speed} mph
-                </Typography>
-              </p>
-              <p>
-                <Typography>
-                <b>Sunrise Time: </b>  {typeof weather === "undefined" ? "undefined" : this.getTime(weather.sys.sunrise)}
-                <b>&emsp;Sunset Time: </b>  {typeof weather === "undefined" ? "undefined" : this.getTime(weather.sys.sunset)}
-                </Typography>
-              </p>
-            </div>
-          </ExpansionPanelDetails>
-        </ExpansionPanel>
+            </ExpansionPanelSummary>
+            <ExpansionPanelDetails>
+              <div>
+                <div className={classes.description}>
+                  <Typography>
+                    <b>Current Temperature: </b>  {typeof weather === "undefined" ? "undefined" :
+                      this.getFareinheitFromKelvin(weather.main.temp).toFixed(2)}<sup>o</sup> F
+                    <b>&emsp;  Minimum Temperature: </b>  {typeof weather === "undefined" ? "undefined" :
+                      this.getFareinheitFromKelvin(weather.main.temp_min).toFixed(2)}<sup>o</sup> F
+                    <b>&emsp;  Maximum Temperature: </b>  {typeof weather === "undefined" ? "undefined" :
+                      this.getFareinheitFromKelvin(weather.main.temp_max).toFixed(2)}<sup>o</sup> F
+                  </Typography>
+                </div>
+                <div className={classes.description}>
+                  <Typography>
+                    <b>Humidity: </b>  {typeof weather === "undefined" ? "undefined" : weather.main.humidity}%
+                    <b>&emsp;Pressure: </b>  {typeof weather === "undefined" ? "undefined" : (0.03 * weather.main.pressure).toFixed(2)} inHg
+                  </Typography>
+                </div>
+                <div className={classes.description}>
+                  <Typography>
+                    <b>Visibility: </b>  {typeof weather === "undefined" ? "undefined" : weather.visibility} Yards
+                    <b>&emsp;Wind Speed: </b>  {typeof weather === "undefined" ? "undefined" : weather.wind.speed} mph
+                  </Typography>
+                </div>
+                <div className={classes.description}>
+                  <Typography>
+                  <b>Sunrise Time: </b>  {typeof weather === "undefined" ? "undefined" : this.getTime(weather.sys.sunrise)}
+                  <b>&emsp;Sunset Time: </b>  {typeof weather === "undefined" ? "undefined" : this.getTime(weather.sys.sunset)}
+                  </Typography>
+                </div>
+              </div>
+            </ExpansionPanelDetails>
+          </ExpansionPanel>
+        </div>
       </div>
     );
   }
