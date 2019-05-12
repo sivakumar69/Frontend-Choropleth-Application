@@ -1,5 +1,4 @@
 # Frontend-Choropleth-Application
-Internship Assignment
 
 # Technology Stack
 Used `React.js` Framework with `react-dom-router` for routing, `Material UI` for designing web pages rapidly, `D3.js` along with `datamaps` for visualization of map using topology Json, `react-color` for colour palette and `Open Weather API` call for getting weather report. 
